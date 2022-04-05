@@ -2,9 +2,13 @@ namespace OneBitSpriteGen
 {
 	public partial class MainForm : Form
 	{
+		// the sprite parameters as displayed on the property grid
+		SpriteParameters mSpriteParameters = new SpriteParameters();
+
 		public MainForm()
 		{
 			InitializeComponent();
+			propertyGridSpriteParameters.SelectedObject = mSpriteParameters;
 		}
 
 		#region menu events
@@ -17,6 +21,20 @@ namespace OneBitSpriteGen
 				this.pictureBoxImage.Image = bitmap;
 				this.richTextBoxLogConsole.Text = ConvertToHex(bitmap, 6, 16);
 			}
+		}
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Application.Exit();
 		}
 		#endregion
 
@@ -55,5 +73,17 @@ namespace OneBitSpriteGen
 				}
 			return result;
 		}
+
+		#region toolbox
+		private void checkBoxDraw_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void checkBoxSelect_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+		#endregion
 	}
 }
