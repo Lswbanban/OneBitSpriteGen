@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace OneBitSpriteGen
 {
@@ -9,27 +7,79 @@ namespace OneBitSpriteGen
 		[Category("Sprite")]
 		[Description("Width of each sprite in pixel.")]
 		[DefaultValue(8)]
-		public int Width => mWidth;
+		public int Width
+		{
+			get { return mWidth; }
+			set { mWidth = (value > 0) ? value : 1; }
+		}
 		private int mWidth = 8;
 
 		[Category("Sprite")]
 		[Description("Height of each sprite in pixel.")]
 		[DefaultValue(8)]
-		public int Height => mHeight;
+		public int Height
+		{
+			get { return mHeight; }
+			set { mHeight = (value > 0) ? value : 1; }
+		}
 		private int mHeight = 8;
 
 		[Category("Export")]
 		[DisplayName("Sprite Prefix")]
 		[Description("The string that should be placed before each new sprite.")]
 		[DefaultValue("{")]
-		public string SpritePrefix => mSpritePrefix;
+		public string SpritePrefix
+		{
+			get { return mSpritePrefix; }
+			set { mSpritePrefix = value; }
+		}
 		private string mSpritePrefix = "{";
 
 		[Category("Export")]
 		[DisplayName("Sprite Postfix")]
 		[Description("The string that should be placed after each new sprite.")]
 		[DefaultValue("}, ")]
-		public string SpritePostfix => mSpritePostfix;
+		public string SpritePostfix
+		{
+			get { return mSpritePostfix; }
+			set { mSpritePostfix = value; }
+		}
 		private string mSpritePostfix = "}, ";
+
+		public string ConvertToHex(Bitmap bitmap)
+		{
+			// count the number of sprite in the image
+			int spriteCountX = bitmap.Width / Width;
+			int spriteCountY = bitmap.Height / Height;
+			// count how many char is used vertically
+			int charCount = Height / 8;
+			int blackARGB = Color.Black.ToArgb();
+			// declare the result string
+			string result = string.Empty;
+
+			// iterate on the image
+			for (int sy = 0; sy < spriteCountY; sy++)
+				for (int sx = 0; sx < spriteCountX; sx++)
+				{
+					result += SpritePrefix;
+					for (int ch = 0; ch < charCount; ch++)
+					{
+						int startY = (sy * Height) + (ch * 8);
+						for (int x = 0; x < Width; x++)
+						{
+							int startX = (sx * Width) + x;
+							byte pixels = 0;
+							for (int y = 0; y < 8; y++)
+							{
+								if (bitmap.GetPixel(startX, startY + y).ToArgb() != blackARGB)
+									pixels |= (byte)(1 << y);
+							}
+							result += "0x" + pixels.ToString("x") + ", ";
+						}
+					}
+					result += SpritePostfix;
+				}
+			return result;
+		}
 	}
 }
