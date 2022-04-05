@@ -113,6 +113,14 @@ namespace OneBitSpriteGen
 			RedrawImageBox(true);
 		}
 		#endregion
+
+		#region help menu
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			AboutBox aboutBox = new AboutBox();
+			aboutBox.ShowDialog();
+		}
+		#endregion
 		#endregion
 
 		#region the main image panel

@@ -61,6 +61,8 @@
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.timerAnimation = new System.Windows.Forms.Timer(this.components);
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerToolAndImage)).BeginInit();
 			this.splitContainerToolAndImage.Panel1.SuspendLayout();
@@ -87,7 +89,8 @@
 			// 
 			this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.viewToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.helpToolStripMenuItem});
 			this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
 			this.mainMenuStrip.Name = "mainMenuStrip";
 			this.mainMenuStrip.Size = new System.Drawing.Size(800, 24);
@@ -427,6 +430,21 @@
 			this.timerAnimation.Interval = 17;
 			this.timerAnimation.Tick += new System.EventHandler(this.timerAnimation_Tick);
 			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.helpToolStripMenuItem.Text = "Help";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.aboutToolStripMenuItem.Text = "About...";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -500,5 +518,7 @@
 		private TrackBar trackBarScale;
 		private PictureBox pictureBoxPreview;
 		private System.Windows.Forms.Timer timerAnimation;
+		private ToolStripMenuItem helpToolStripMenuItem;
+		private ToolStripMenuItem aboutToolStripMenuItem;
 	}
 }
