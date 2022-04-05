@@ -28,7 +28,7 @@ namespace OneBitSpriteGen
 			// clear the default image an redraw the image box
 			Graphics gc = Graphics.FromImage(mBitmap);
 			gc.Clear(Color.Black);
-			RedrawImageBox(true);
+			UpdateAfterBitmapChange();
 			ResizePreviewImage();
 		}
 
@@ -57,9 +57,18 @@ namespace OneBitSpriteGen
 		//	view.Invalidate();
 		//}
 
-		private void UpdateViewsAfterBitmapChange()
+		private void UpdateAfterBitmapChange()
 		{
+			// redraw the picture box at the correct size
+			RedrawImageBox(true);
+			// adjust the max anim frame because the bitmap size has changed
+			UpdateMaxAnimFrame();
 			// reexport in text
+			UpdateExportedText();
+		}
+
+		private void UpdateExportedText()
+		{
 			this.richTextBoxLogConsole.Text = mSpriteParameters.ConvertToHex(mBitmap);
 		}
 
@@ -73,9 +82,7 @@ namespace OneBitSpriteGen
 				// load the new bitmap from file
 				mBitmap = new Bitmap(openFileDialog.FileName);
 				// redraw the image box at the correct size
-				RedrawImageBox(true);
-				// update all the other views
-				UpdateViewsAfterBitmapChange();
+				UpdateAfterBitmapChange();
 			}
 		}
 
@@ -215,6 +222,12 @@ namespace OneBitSpriteGen
 			RedrawImageBox(true);
 			ResizePreviewImage();
 
+			// reexport in text
+			UpdateExportedText();
+
+			// adjust the max anim frame in case the sprite width changed
+			UpdateMaxAnimFrame();
+
 			// also adjust the timer frequency for the animation
 			this.timerAnimation.Interval = (int)Math.Round(1000f / mSpriteParameters.GameFramerate);
 		}
@@ -264,6 +277,32 @@ namespace OneBitSpriteGen
 				gc.DrawImage(mBitmap, mPreviewImageRectangle, sourceRectangle, GraphicsUnit.Pixel);
 				this.pictureBoxPreview.Refresh();
 			}
+		}
+
+		private void UpdateMaxAnimFrame()
+		{
+			int maxValue = (mBitmap.Width / mSpriteParameters.Width) - 1;
+			numericUpDownAnimFrom.Maximum = maxValue;
+			numericUpDownAnimTo.Maximum = maxValue;
+		}
+
+		private void numericUpDownAnimFrom_ValueChanged(object sender, EventArgs e)
+		{
+			// push the to value, if the from is bigger
+			if (numericUpDownAnimTo.Value < numericUpDownAnimFrom.Value)
+				numericUpDownAnimTo.Value = numericUpDownAnimFrom.Value;
+		}
+
+		private void numericUpDownAnimTo_ValueChanged(object sender, EventArgs e)
+		{
+			// push the to value, if the to is smaller
+			if (numericUpDownAnimTo.Value < numericUpDownAnimFrom.Value)
+				numericUpDownAnimFrom.Value = numericUpDownAnimTo.Value;
+		}
+
+		private void trackBarScale_ValueChanged(object sender, EventArgs e)
+		{
+			ResizePreviewImage();
 		}
 		#endregion
 	}

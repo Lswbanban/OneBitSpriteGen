@@ -357,6 +357,7 @@
 			this.numericUpDownAnimTo.Name = "numericUpDownAnimTo";
 			this.numericUpDownAnimTo.Size = new System.Drawing.Size(41, 23);
 			this.numericUpDownAnimTo.TabIndex = 5;
+			this.numericUpDownAnimTo.ValueChanged += new System.EventHandler(this.numericUpDownAnimTo_ValueChanged);
 			// 
 			// numericUpDownAnimFrom
 			// 
@@ -364,6 +365,7 @@
 			this.numericUpDownAnimFrom.Name = "numericUpDownAnimFrom";
 			this.numericUpDownAnimFrom.Size = new System.Drawing.Size(41, 23);
 			this.numericUpDownAnimFrom.TabIndex = 4;
+			this.numericUpDownAnimFrom.ValueChanged += new System.EventHandler(this.numericUpDownAnimFrom_ValueChanged);
 			// 
 			// label5
 			// 
@@ -394,6 +396,7 @@
 			this.trackBarScale.Size = new System.Drawing.Size(162, 45);
 			this.trackBarScale.TabIndex = 1;
 			this.trackBarScale.Value = 1;
+			this.trackBarScale.ValueChanged += new System.EventHandler(this.trackBarScale_ValueChanged);
 			// 
 			// pictureBoxPreview
 			// 
