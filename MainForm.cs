@@ -1,4 +1,5 @@
 using System.Drawing.Drawing2D;
+using System.Reflection;
 
 namespace OneBitSpriteGen
 {
@@ -11,8 +12,8 @@ namespace OneBitSpriteGen
 		private Bitmap mBitmap = new Bitmap(8,8);
 
 		// pen for drawing the image
-		private Pen mPixelGridPen = new Pen(Color.Gray, 1);
-		private Pen mSpriteGridPen = new Pen(Color.Blue, 1);
+		private Pen mPixelGridPen = new Pen(Color.FromArgb(30,30,30), 1);
+		private Pen mSpriteGridPen = new Pen(Color.Cyan, 1);
 
 		public MainForm()
 		{
@@ -20,12 +21,33 @@ namespace OneBitSpriteGen
 
 			// assign the sprite parameter to the property grid
 			propertyGridSpriteParameters.SelectedObject = mSpriteParameters;
-			
+
+			// increase the column width of the property grid
+			//SetPropertyGridLabelColumnWidth(100);
+
 			// clear the default image an redraw the image box
 			Graphics gc = Graphics.FromImage(mBitmap);
 			gc.Clear(Color.Black);
-			RedrawImageBox();
+			RedrawImageBox(true);
 		}
+
+		//private void SetPropertyGridLabelColumnWidth(int width)
+		//{
+		//	#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+		//	#pragma warning disable CS8602 // Dereference of a possibly null reference.
+		//	// get the grid view
+		//	Control view = this.propertyGridSpriteParameters.GetType().GetField("gridView", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(this.propertyGridSpriteParameters) as Control;
+
+		//	// set label width
+		//	FieldInfo fi = view.GetType().GetField("labelWidth", BindingFlags.Instance | BindingFlags.NonPublic);
+		//	fi.SetValue(view, width);
+
+		//	#pragma warning restore CS8602 // Dereference of a possibly null reference.
+		//	#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+
+		//	// refresh
+		//	view.Invalidate();
+		//}
 
 		private void UpdateViewsAfterBitmapChange()
 		{
@@ -43,7 +65,7 @@ namespace OneBitSpriteGen
 				// load the new bitmap from file
 				mBitmap = new Bitmap(openFileDialog.FileName);
 				// redraw the image box at the correct size
-				RedrawImageBox();
+				RedrawImageBox(true);
 				// update all the other views
 				UpdateViewsAfterBitmapChange();
 			}
@@ -68,24 +90,24 @@ namespace OneBitSpriteGen
 		#region View menu
 		private void pixelGridToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			RedrawImageBox();
+			RedrawImageBox(true);
 		}
 
 		private void spriteGridToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			RedrawImageBox();
+			RedrawImageBox(true);
 		}
 		#endregion
 		#endregion
 
 		#region the main image panel
-		private void RedrawImageBox()
+		private void RedrawImageBox(bool shouldRefresh)
 		{
 			// compute if we need to add margin on top and bottom or left and right
 			int widthScale = pictureBoxImage.Width / mBitmap.Width;
 
 			// try to scale on width first
-			int width = pictureBoxImage.Width;
+			int width = mBitmap.Width * widthScale;
 			int height = mBitmap.Height * widthScale;
 			int heightScale = height / mBitmap.Height;
 			if (height > pictureBoxImage.Height)
@@ -93,7 +115,7 @@ namespace OneBitSpriteGen
 				// the height is too big, so scale according to height
 				heightScale = pictureBoxImage.Height / mBitmap.Height;
 				width = mBitmap.Width * heightScale;
-				height = pictureBoxImage.Height;
+				height = mBitmap.Height * heightScale;
 				// recompute the width scale
 				widthScale = width / mBitmap.Width;
 			}
@@ -137,7 +159,7 @@ namespace OneBitSpriteGen
 			{
 				// vertical lines
 				int spriteWidth = mSpriteParameters.Width;
-				int horizSpriteCount = mBitmap.Width / spriteWidth;
+				int horizSpriteCount = (mBitmap.Width / spriteWidth) + 1;
 				spriteWidth *= widthScale;
 				for (int i = 0; i < horizSpriteCount; i++)
 				{
@@ -146,7 +168,7 @@ namespace OneBitSpriteGen
 				}
 				// horizontal lines
 				int spriteHeight = mSpriteParameters.Height;
-				int vertSpriteCount = mBitmap.Height / spriteHeight;
+				int vertSpriteCount = (mBitmap.Height / spriteHeight) + 1;
 				spriteHeight *= heightScale;
 				for (int j = 0; j < vertSpriteCount; j++)
 				{
@@ -154,13 +176,17 @@ namespace OneBitSpriteGen
 					gc.DrawLine(mSpriteGridPen, 0, y, width, y);
 				}
 			}
+
+			// refresh if we need to
+			if (shouldRefresh)
+				this.pictureBoxImage.Refresh();
 		}
 
 
 		private void pictureBoxImage_SizeChanged(object sender, EventArgs e)
 		{
 			// redraw the image with widow is resized
-			RedrawImageBox();
+			RedrawImageBox(false);
 		}
 		#endregion
 
@@ -173,6 +199,12 @@ namespace OneBitSpriteGen
 		private void checkBoxSelect_CheckedChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		private void propertyGridSpriteParameters_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+		{
+			// we may have changed the sprite width or height
+			RedrawImageBox(true);
 		}
 		#endregion
 	}

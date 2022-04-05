@@ -183,7 +183,7 @@
 			this.splitContainerToolAndImage.Panel2.Controls.Add(this.splitContainerImageAndInfo);
 			this.splitContainerToolAndImage.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
 			this.splitContainerToolAndImage.Size = new System.Drawing.Size(800, 426);
-			this.splitContainerToolAndImage.SplitterDistance = 140;
+			this.splitContainerToolAndImage.SplitterDistance = 172;
 			this.splitContainerToolAndImage.TabIndex = 1;
 			// 
 			// label3
@@ -202,9 +202,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.propertyGridSpriteParameters.Location = new System.Drawing.Point(3, 103);
 			this.propertyGridSpriteParameters.Name = "propertyGridSpriteParameters";
-			this.propertyGridSpriteParameters.Size = new System.Drawing.Size(130, 316);
+			this.propertyGridSpriteParameters.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+			this.propertyGridSpriteParameters.Size = new System.Drawing.Size(162, 316);
 			this.propertyGridSpriteParameters.TabIndex = 8;
 			this.propertyGridSpriteParameters.ToolbarVisible = false;
+			this.propertyGridSpriteParameters.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.propertyGridSpriteParameters_PropertyValueChanged);
 			// 
 			// checkBoxSelect
 			// 
@@ -214,7 +216,7 @@
 			this.checkBoxSelect.Cursor = System.Windows.Forms.Cursors.Default;
 			this.checkBoxSelect.Location = new System.Drawing.Point(3, 52);
 			this.checkBoxSelect.Name = "checkBoxSelect";
-			this.checkBoxSelect.Size = new System.Drawing.Size(130, 24);
+			this.checkBoxSelect.Size = new System.Drawing.Size(162, 24);
 			this.checkBoxSelect.TabIndex = 7;
 			this.checkBoxSelect.Text = "Select";
 			this.checkBoxSelect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -231,7 +233,7 @@
 			this.checkBoxDraw.Cursor = System.Windows.Forms.Cursors.Default;
 			this.checkBoxDraw.Location = new System.Drawing.Point(3, 3);
 			this.checkBoxDraw.Name = "checkBoxDraw";
-			this.checkBoxDraw.Size = new System.Drawing.Size(130, 24);
+			this.checkBoxDraw.Size = new System.Drawing.Size(162, 24);
 			this.checkBoxDraw.TabIndex = 6;
 			this.checkBoxDraw.Text = "Draw";
 			this.checkBoxDraw.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -242,7 +244,7 @@
 			// 
 			this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBox2.BackColor = System.Drawing.Color.Black;
-			this.pictureBox2.Location = new System.Drawing.Point(113, 31);
+			this.pictureBox2.Location = new System.Drawing.Point(145, 31);
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.Size = new System.Drawing.Size(16, 15);
 			this.pictureBox2.TabIndex = 4;
@@ -261,7 +263,7 @@
 			// 
 			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(79, 31);
+			this.label2.Location = new System.Drawing.Point(111, 31);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(35, 15);
 			this.label2.TabIndex = 2;
@@ -294,7 +296,7 @@
 			// 
 			this.splitContainerImageAndInfo.Panel2.Controls.Add(this.richTextBoxLogConsole);
 			this.splitContainerImageAndInfo.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
-			this.splitContainerImageAndInfo.Size = new System.Drawing.Size(656, 426);
+			this.splitContainerImageAndInfo.Size = new System.Drawing.Size(624, 426);
 			this.splitContainerImageAndInfo.SplitterDistance = 311;
 			this.splitContainerImageAndInfo.TabIndex = 0;
 			// 
@@ -314,8 +316,8 @@
 			// splitContainerImageAndAnim.Panel2
 			// 
 			this.splitContainerImageAndAnim.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
-			this.splitContainerImageAndAnim.Size = new System.Drawing.Size(656, 311);
-			this.splitContainerImageAndAnim.SplitterDistance = 472;
+			this.splitContainerImageAndAnim.Size = new System.Drawing.Size(624, 311);
+			this.splitContainerImageAndAnim.SplitterDistance = 448;
 			this.splitContainerImageAndAnim.TabIndex = 0;
 			// 
 			// pictureBoxImage
@@ -323,7 +325,7 @@
 			this.pictureBoxImage.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pictureBoxImage.Location = new System.Drawing.Point(0, 0);
 			this.pictureBoxImage.Name = "pictureBoxImage";
-			this.pictureBoxImage.Size = new System.Drawing.Size(468, 307);
+			this.pictureBoxImage.Size = new System.Drawing.Size(444, 307);
 			this.pictureBoxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
 			this.pictureBoxImage.TabIndex = 0;
 			this.pictureBoxImage.TabStop = false;
@@ -334,7 +336,7 @@
 			this.richTextBoxLogConsole.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.richTextBoxLogConsole.Location = new System.Drawing.Point(0, 0);
 			this.richTextBoxLogConsole.Name = "richTextBoxLogConsole";
-			this.richTextBoxLogConsole.Size = new System.Drawing.Size(652, 107);
+			this.richTextBoxLogConsole.Size = new System.Drawing.Size(620, 107);
 			this.richTextBoxLogConsole.TabIndex = 0;
 			this.richTextBoxLogConsole.Text = "";
 			// 

@@ -15,12 +15,23 @@ namespace OneBitSpriteGen
 		private int mWidth = 8;
 
 		[Category("Sprite")]
-		[Description("Height of each sprite in pixel.")]
+		[Description("Height of each sprite in pixel. This can only be a multiple of 8.")]
 		[DefaultValue(8)]
 		public int Height
 		{
 			get { return mHeight; }
-			set { mHeight = (value > 0) ? value : 1; }
+			set
+			{
+				mHeight = value;
+				if (mHeight < 8)
+				{
+					mHeight = 8;
+				}
+				else if ((mHeight % 8) != 0)
+				{
+					mHeight = ((mHeight / 8) + 1) * 8;
+				}
+			}
 		}
 		private int mHeight = 8;
 
