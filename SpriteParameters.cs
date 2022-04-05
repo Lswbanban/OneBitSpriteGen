@@ -57,6 +57,38 @@ namespace OneBitSpriteGen
 		}
 		private string mSpritePostfix = "}, ";
 
+		[Category("Animation")]
+		[DisplayName("Is Anim Looping")]
+		[Description("Check if the animation is looping.")]
+		[DefaultValue(true)]
+		public bool IsAnimLooping
+		{
+			get { return mIsAnimLooping; }
+			set { mIsAnimLooping = value; }
+		}
+		private bool mIsAnimLooping = true;
+
+		[Category("Animation")]
+		[DisplayName("Game Framerate")]
+		[Description("Number of frame per second that the game run.")]
+		[DefaultValue(60)]
+		public int GameFramerate
+		{
+			get { return mGameFramerate; }
+			set { mGameFramerate = value; }
+		}
+		private int mGameFramerate = 60;
+
+		[Category("Animation")]
+		[DisplayName("Anim Frame Duration")]
+		[Description("Game frame count spent in each sprite anim frame.")]
+		public List<int> AnimFrameDuration
+		{
+			get { return mAnimFrameDuration; }
+			set { mAnimFrameDuration = value; }
+		}
+		private List<int> mAnimFrameDuration = new List<int>(new int[]{4});
+
 		public string ConvertToHex(Bitmap bitmap)
 		{
 			// count the number of sprite in the image

@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,9 +51,16 @@
 			this.splitContainerImageAndInfo = new System.Windows.Forms.SplitContainer();
 			this.splitContainerImageAndAnim = new System.Windows.Forms.SplitContainer();
 			this.pictureBoxImage = new System.Windows.Forms.PictureBox();
+			this.numericUpDownAnimTo = new System.Windows.Forms.NumericUpDown();
+			this.numericUpDownAnimFrom = new System.Windows.Forms.NumericUpDown();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.trackBarScale = new System.Windows.Forms.TrackBar();
+			this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
 			this.richTextBoxLogConsole = new System.Windows.Forms.RichTextBox();
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.timerAnimation = new System.Windows.Forms.Timer(this.components);
 			this.mainMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerToolAndImage)).BeginInit();
 			this.splitContainerToolAndImage.Panel1.SuspendLayout();
@@ -66,8 +74,13 @@
 			this.splitContainerImageAndInfo.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerImageAndAnim)).BeginInit();
 			this.splitContainerImageAndAnim.Panel1.SuspendLayout();
+			this.splitContainerImageAndAnim.Panel2.SuspendLayout();
 			this.splitContainerImageAndAnim.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownAnimTo)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownAnimFrom)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// mainMenuStrip
@@ -315,6 +328,12 @@
 			// 
 			// splitContainerImageAndAnim.Panel2
 			// 
+			this.splitContainerImageAndAnim.Panel2.Controls.Add(this.numericUpDownAnimTo);
+			this.splitContainerImageAndAnim.Panel2.Controls.Add(this.numericUpDownAnimFrom);
+			this.splitContainerImageAndAnim.Panel2.Controls.Add(this.label5);
+			this.splitContainerImageAndAnim.Panel2.Controls.Add(this.label4);
+			this.splitContainerImageAndAnim.Panel2.Controls.Add(this.trackBarScale);
+			this.splitContainerImageAndAnim.Panel2.Controls.Add(this.pictureBoxPreview);
 			this.splitContainerImageAndAnim.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
 			this.splitContainerImageAndAnim.Size = new System.Drawing.Size(624, 311);
 			this.splitContainerImageAndAnim.SplitterDistance = 448;
@@ -331,6 +350,62 @@
 			this.pictureBoxImage.TabStop = false;
 			this.pictureBoxImage.SizeChanged += new System.EventHandler(this.pictureBoxImage_SizeChanged);
 			// 
+			// numericUpDownAnimTo
+			// 
+			this.numericUpDownAnimTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.numericUpDownAnimTo.Location = new System.Drawing.Point(124, 217);
+			this.numericUpDownAnimTo.Name = "numericUpDownAnimTo";
+			this.numericUpDownAnimTo.Size = new System.Drawing.Size(41, 23);
+			this.numericUpDownAnimTo.TabIndex = 5;
+			// 
+			// numericUpDownAnimFrom
+			// 
+			this.numericUpDownAnimFrom.Location = new System.Drawing.Point(45, 217);
+			this.numericUpDownAnimFrom.Name = "numericUpDownAnimFrom";
+			this.numericUpDownAnimFrom.Size = new System.Drawing.Size(41, 23);
+			this.numericUpDownAnimFrom.TabIndex = 4;
+			// 
+			// label5
+			// 
+			this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(96, 220);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(22, 15);
+			this.label5.TabIndex = 3;
+			this.label5.Text = "To:";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(3, 221);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(38, 15);
+			this.label4.TabIndex = 2;
+			this.label4.Text = "From:";
+			// 
+			// trackBarScale
+			// 
+			this.trackBarScale.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.trackBarScale.Location = new System.Drawing.Point(3, 171);
+			this.trackBarScale.Minimum = 1;
+			this.trackBarScale.Name = "trackBarScale";
+			this.trackBarScale.Size = new System.Drawing.Size(162, 45);
+			this.trackBarScale.TabIndex = 1;
+			this.trackBarScale.Value = 1;
+			// 
+			// pictureBoxPreview
+			// 
+			this.pictureBoxPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.pictureBoxPreview.Location = new System.Drawing.Point(3, 3);
+			this.pictureBoxPreview.Name = "pictureBoxPreview";
+			this.pictureBoxPreview.Size = new System.Drawing.Size(162, 162);
+			this.pictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.pictureBoxPreview.TabIndex = 0;
+			this.pictureBoxPreview.TabStop = false;
+			// 
 			// richTextBoxLogConsole
 			// 
 			this.richTextBoxLogConsole.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -344,6 +419,11 @@
 			// 
 			this.openFileDialog.Title = "Open Image";
 			// 
+			// timerAnimation
+			// 
+			this.timerAnimation.Interval = 17;
+			this.timerAnimation.Tick += new System.EventHandler(this.timerAnimation_Tick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -354,6 +434,7 @@
 			this.MainMenuStrip = this.mainMenuStrip;
 			this.Name = "MainForm";
 			this.Text = "One Bit Sprite Gen";
+			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.mainMenuStrip.ResumeLayout(false);
 			this.mainMenuStrip.PerformLayout();
 			this.splitContainerToolAndImage.Panel1.ResumeLayout(false);
@@ -368,9 +449,15 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerImageAndInfo)).EndInit();
 			this.splitContainerImageAndInfo.ResumeLayout(false);
 			this.splitContainerImageAndAnim.Panel1.ResumeLayout(false);
+			this.splitContainerImageAndAnim.Panel2.ResumeLayout(false);
+			this.splitContainerImageAndAnim.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerImageAndAnim)).EndInit();
 			this.splitContainerImageAndAnim.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownAnimTo)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownAnimFrom)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -403,5 +490,12 @@
 		private ToolStripMenuItem viewToolStripMenuItem;
 		private ToolStripMenuItem pixelGridToolStripMenuItem;
 		private ToolStripMenuItem spriteGridToolStripMenuItem;
+		private NumericUpDown numericUpDownAnimTo;
+		private NumericUpDown numericUpDownAnimFrom;
+		private Label label5;
+		private Label label4;
+		private TrackBar trackBarScale;
+		private PictureBox pictureBoxPreview;
+		private System.Windows.Forms.Timer timerAnimation;
 	}
 }

@@ -29,7 +29,15 @@ namespace OneBitSpriteGen
 			Graphics gc = Graphics.FromImage(mBitmap);
 			gc.Clear(Color.Black);
 			RedrawImageBox(true);
+			ResizePreviewImage();
 		}
+
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			// start the animation
+			this.timerAnimation.Enabled = true;
+		}
+
 
 		//private void SetPropertyGridLabelColumnWidth(int width)
 		//{
@@ -205,6 +213,57 @@ namespace OneBitSpriteGen
 		{
 			// we may have changed the sprite width or height
 			RedrawImageBox(true);
+			ResizePreviewImage();
+
+			// also adjust the timer frequency for the animation
+			this.timerAnimation.Interval = (int)Math.Round(1000f / mSpriteParameters.GameFramerate);
+		}
+		#endregion
+
+		#region Animation panel
+		private int mCurrentAnimFrame = 0;
+		private int mFrameCountForCurrentAnim = 0;
+		private Rectangle mPreviewImageRectangle = new Rectangle();
+
+		private void ResizePreviewImage()
+		{
+			int scale = this.trackBarScale.Value;
+			int width = mSpriteParameters.Width * scale;
+			int height = mSpriteParameters.Height * scale;
+			this.pictureBoxPreview.Image = new Bitmap(width, height);
+			mPreviewImageRectangle = new Rectangle(0, 0, width, height);
+			this.pictureBoxPreview.Refresh();
+		}
+
+		private void timerAnimation_Tick(object sender, EventArgs e)
+		{
+			// increase the frame count for the current anim frame
+			mFrameCountForCurrentAnim++;
+
+			// get the local anim frame to check in the array of frame duration
+			int localAnimFrame = mCurrentAnimFrame - (int)this.numericUpDownAnimFrom.Value;
+
+			// check if it is the time to change frame
+			if (mFrameCountForCurrentAnim >= mSpriteParameters.AnimFrameDuration[localAnimFrame % mSpriteParameters.AnimFrameDuration.Count])
+			{
+				// reset the frame count and move to the next frame
+				mFrameCountForCurrentAnim = 0;
+				mCurrentAnimFrame++;
+				if (mCurrentAnimFrame > this.numericUpDownAnimTo.Value)
+					mCurrentAnimFrame = (int)this.numericUpDownAnimFrom.Value;
+
+				// compute the rectangle of the frame inside the bitmap
+				Rectangle sourceRectangle = new Rectangle(mCurrentAnimFrame * mSpriteParameters.Width, 0, mSpriteParameters.Width, mSpriteParameters.Height);
+
+				// get the gc of the preview image to draw the frame
+				Graphics gc = Graphics.FromImage(this.pictureBoxPreview.Image);
+				gc.CompositingMode = CompositingMode.SourceCopy;
+				gc.InterpolationMode = InterpolationMode.NearestNeighbor;
+				gc.SmoothingMode = SmoothingMode.None;
+				gc.PixelOffsetMode = PixelOffsetMode.Half;
+				gc.DrawImage(mBitmap, mPreviewImageRectangle, sourceRectangle, GraphicsUnit.Pixel);
+				this.pictureBoxPreview.Refresh();
+			}
 		}
 		#endregion
 	}
